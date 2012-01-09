@@ -12,15 +12,13 @@ use Email::Simple;
 use Email::Simple::Creator;
 use Email::MIME;
 use Path::Class;
-use YAML;
-
 
 my $body="<html><body>hello,  나는 민선, 테스트중이다 오바<body><html>";
 my $msg = Email::MIME->create(
     header => [
         From        => 'noreply@deliverynews.minsun', 
         To          => 'mintegrals@gmail.com',
-        CC          => ',quimien@gmail.com',
+        #CC          => ',quimien@gmail.com',
         Subject     => "Reading Article",
         Type        => 'multipart/mixed',
     ],
