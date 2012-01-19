@@ -17,9 +17,9 @@ my $body='<html><head><meta http-equiv="Content-Type" content="text/html; charse
 
 my $msg = Email::MIME->create(
     header_str => [
-          From        => q(Test <noreply@minsun>),
-          To          => q(Test <mintegrals@gmail.com>),
-          #Cc          => q("SeongHo Park" <quimien@gmail.com>),
+          From        => q(Deliver News <noreply@minsun>),
+          To          => q(Minsun Lee <mintegrals@gmail.com>),
+          Cc          => q(SeongHo Park <quimien@gmail.com>),
           Subject     => "test,한글",
     ],
     body => encode_utf8($body),
