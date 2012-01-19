@@ -6,30 +6,24 @@ use utf8;
 
 use Data::Dumper;
 use DateTime;
-use Encode;
+use Encode qw/encode_utf8 decode_utf8 encode/;
 use Email::Sender::Simple qw(sendmail);
 use Email::Simple;
 use Email::Simple::Creator;
 use Email::MIME;
 use Path::Class;
 
-my $body="<html><body>hello,  나는 민선, 테스트중이다 오바<body><html>";
+my $body='<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>hello,  나는 민선, 테스트중이다 오바</body></html>';
+
 my $msg = Email::MIME->create(
-    header => [
-        From        => 'noreply@deliverynews.minsun', 
-        To          => 'mintegrals@gmail.com',
-        #CC          => ',quimien@gmail.com',
-        Subject     => "Reading Article",
-        Type        => 'multipart/mixed',
+    header_str => [
+          From        => q(Test <noreply@minsun>),
+          To          => q(Test <mintegrals@gmail.com>),
+          #Cc          => q("SeongHo Park" <quimien@gmail.com>),
+          Subject     => "test,한글",
     ],
-    parts => [
-        Email::MIME->create(
-            attributes => {
-                content_type => 'text/html',
-                charset      => 'utf8',
-            },
-          body => $body,#'HELLO',#FIXME
-        ),
-    ],
+    body => encode_utf8($body),
 );
-sendmail($msg) && print "sent\n";    
+$msg->charset_set('utf8');
+$msg->content_type_set( 'text/html' );
+sendmail($msg) && print "sent\n";
